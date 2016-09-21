@@ -1,0 +1,54 @@
+var n = parseInt(readline()); // the number of temperatures to analyse
+var temps = readline(); // the n temperatures expressed as integers ranging from -273 to 5526
+
+var closest_to_zero = 2147483645;
+var current;
+var closest_to_zero_is_negativ = false;
+var temp_string_array = [];
+temp_string_array = temps.split(" ");
+
+for(var i = 0; i<n; i++){
+    current = parseInt(temp_string_array[i]);
+    var less_than_zero = false;
+    
+    if(0 > current){
+        current = current * (-1);
+        less_than_zero = true;
+    }
+    if(closest_to_zero == 2147483645){
+        closest_to_zero = current;
+        
+        if(less_than_zero){
+            closest_to_zero_is_negativ = true;
+        }
+        else{
+            closest_to_zero_is_negativ = false;    
+        }
+    }
+    if(closest_to_zero > current){
+        if(less_than_zero){
+            closest_to_zero = current;
+            closest_to_zero_is_negativ = true;
+        }
+        else{
+            closest_to_zero = current;
+            closest_to_zero_is_negativ = false;
+        }
+    }
+    if(current == closest_to_zero && closest_to_zero_is_negativ === true && less_than_zero === false){
+        closest_to_zero = closest_to_zero * (-1);
+    }
+}
+// Write an action using System.out.println()
+// To debug: System.err.println("Debug messages...");
+if(closest_to_zero == 2147483645){
+    print(0);
+}
+if(closest_to_zero_is_negativ){
+    print(-closest_to_zero);
+}
+if(closest_to_zero_is_negativ === false && closest_to_zero != 2147483645){
+    print(closest_to_zero);    
+}
+// Write an action using print()
+// To debug: printErr('Debug messages...');
